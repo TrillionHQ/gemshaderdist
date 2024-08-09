@@ -43284,11 +43284,17 @@ async function onload() {
   renderer.outputEncoding = void 0;
   renderer.setSize(window.innerWidth, window.innerHeight);
   window.render = renderer;
-  camera.position.set(1, 4, 3);
+  camera.position.set(0, 0, 1.5);
+  window.camera = camera;
+  const f = gui.addFolder("camera");
+  f.add(camera.position, "x", -5, 5);
+  f.add(camera.position, "y", -5, 5);
+  f.add(camera.position, "z", -5, 5);
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enablePan = true;
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
+  window.controls = controls;
   pmremGenerator = new PMREMGenerator(renderer);
   pmremGenerator.compileEquirectangularShader();
   await loadEXRAssets();
@@ -43297,7 +43303,8 @@ async function onload() {
   setupPhysicalMaterials();
   processModelAssets();
   addMeshesToScene();
+  gui.close();
   animate();
 }
 window.onload = onload;
-//# sourceMappingURL=index-C-7lgpts.js.map
+//# sourceMappingURL=index-CWj0PYBt.js.map
